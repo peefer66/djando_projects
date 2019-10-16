@@ -1,6 +1,5 @@
-"""locallibrary URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
+"""locallibrary URL Configur
+  The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
 Examples:
 Function views
@@ -18,4 +17,18 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+]
+
+# Use include() to add paths from the catalog application
+from django.urls import include
+
+urlpatterns += [
+    path('catalog/', include('catalog.urls')),
+]
+
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+
+urlpatterns += [
+    path('', RedirectView.as_view(url='/catalog/')),
 ]
